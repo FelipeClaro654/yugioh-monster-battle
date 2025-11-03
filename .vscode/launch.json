@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "port": 9230,
+      "request": "attach",
+      "name": "Next.js: debug server-side",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
