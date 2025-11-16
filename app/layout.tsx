@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-// import "./globals.css";
+import "./globals.css";
 import type { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: RootLayout) {
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <main className="min-h-screen bg-gradient-to-b from-blue-900 to-purple-900">
+        <main className="min-h-screen bg-linear-to-b from-blue-900 to-black">
           {children}
         </main>
       </body>

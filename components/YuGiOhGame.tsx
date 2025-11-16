@@ -1,53 +1,47 @@
 "use client";
 
-import { useState, useEffect } from "react";
-// import GameBoard from './GameBoard';
-// import PlayerHand from './PlayerHand';
+import { useEffect } from "react";
 import { Card } from "@/types/card";
 import useGameState from "@/hooks/useGameState";
-import PlayerArea from "./PlayerArea";
+import PlayerScore from "./PlayerScore";
+import PlayerHand from "./PlayerHand";
 
 interface YuGiOhGame {
   initialCards: Card[];
 }
 
 export default function YuGiOhGame({ initialCards }: YuGiOhGame) {
-  const [cards, setCards] = useState(initialCards);
-  const [isLoading, setIsLoading] = useState(false);
+  const { state, dispatch } = useGameState({ initialCards });
+  const Player1Phase = state.players.player1.phase;
+  const Player2Phase = state.players.player2.phase;
+  const Player1RemainingCards = state.players.player1.remainingCards;
 
-  const { state } = useGameState();
+  useEffect(() => {
+    if (initialCards.length > 0 && !state.initialized) {
+      dispatch({ type: "initializeGame" });
+    }
+  }, [initialCards, state.initialized, dispatch]);
 
-  // useEffect(() => {
-  //   if (!initialCards.length) {
-  //     fetch("/api/cards")
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setCards(data.cards);
-  //         setIsLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Failed to fetch cards:", error);
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // }, [initialCards]);
+  useEffect(() => {
+    if (Player1Phase === "draw") {
+      return;
+    }
 
-  // useEffect(() => {
-  //   if (cards.length > 0 && !gameState.initialized) {
-  //     // Sua lógica de inicialização do jogo aqui
-  //     initializeGame(cards);
-  //   }
-  // }, [cards, gameState.initialized]);
+    if (Player2Phase === "draw") {
+      return;
+    }
+  }, [Player1Phase, Player2Phase]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-white text-xl">Carregando cartas...</div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (
+      state.initialized &&
+      Player1RemainingCards.length === initialCards.length
+    ) {
+      dispatch({ type: "drawInitialCards" });
+    }
+  }, [Player1RemainingCards, initialCards, state.initialized, dispatch]);
 
-  if (!cards.length) {
+  if (!initialCards.length) {
     return (
       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
         ❌ Não foi possível carregar as cartas. Por favor, recarregue a página.
@@ -56,9 +50,12 @@ export default function YuGiOhGame({ initialCards }: YuGiOhGame) {
   }
 
   return (
-    <div className="game-container">
-      <PlayerArea lifepoints={state.player.lifepoints} />
-
+    <section className="game-container flex flex-col h-screen">
+      <header className="flex flex-col w-full gap-1 mt-2">
+        <PlayerScore player={1} lifepoints={state.players.player1.lifepoints} />
+        <PlayerScore player={2} lifepoints={state.players.player2.lifepoints} />
+      </header>
+      <div className="h-full"></div>
       {/* <div className="opponent-area">
         <GameBoard 
           monsters={gameState.opponent.board}
@@ -66,22 +63,17 @@ export default function YuGiOhGame({ initialCards }: YuGiOhGame) {
         />
       </div>
       
-      <div className="player-area">
         <PlayerHand 
           cards={gameState.player.hand}
           onSummon={summonMonster}
         />
-        <GameBoard 
-          monsters={gameState.player.board}
-          isPlayer={true}
-          onAttack={attack}
-        />
-      </div>
       
       <div className="game-controls">
         <button onClick={nextPhase}>Próxima Fase</button>
         <button onClick={endTurn}>Terminar Turno</button>
       </div> */}
-    </div>
+
+      <PlayerHand cards={state.players.player1.hand} />
+    </section>
   );
 }
