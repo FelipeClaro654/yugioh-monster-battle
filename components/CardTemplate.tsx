@@ -1,21 +1,30 @@
-import { Card } from "@/types/card";
+import type { Card } from "@/types/card";
 import Image from "next/image";
 
-type Props = {
+type CardTemplateProps = {
   card: Card;
   showHand: boolean;
+  index: number;
+  totalCards: number;
 };
 
-const CardTemplate = (props: Props) => {
-  const styles = props.showHand
-    ? {}
-    : { position: "absolute", bottom: 0, right: 0 };
+const CardTemplate = (props: CardTemplateProps) => {
   return (
-    <div style={styles}>
+    <div
+      className={`
+        transition-all
+        duration-700
+        ease-out
+        ${props.showHand ? "opacity-100" : "opacity-0"}
+      `}
+      style={{
+        transitionDelay: props.showHand ? `${props.index * 100}ms` : "0ms",
+      }}
+    >
       <Image
         alt={props.card.name}
         src={props.card.card_images[0].image_url_small}
-        width={200}
+        width={180}
         height={0}
       />
     </div>

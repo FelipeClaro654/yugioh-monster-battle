@@ -7,12 +7,22 @@ type PlayerHandProps = {
 };
 
 const PlayerHand = (props: PlayerHandProps) => {
-  const [showHand, setShowHand] = useState(true);
+  const [showHand, setShowHand] = useState(false);
+
+  setTimeout(() => {
+    setShowHand(true);
+  }, 1000);
 
   return (
-    <div className="flex">
-      {props?.cards?.map((card) => (
-        <CardTemplate key={card.id} showHand={showHand} card={card} />
+    <div className="flex  self-end w-full justify-center">
+      {props?.cards?.map((card, index) => (
+        <CardTemplate
+          key={`${card.id}-${card.name}`}
+          showHand={showHand}
+          card={card}
+          index={index}
+          totalCards={props.cards.length}
+        />
       ))}
     </div>
   );
