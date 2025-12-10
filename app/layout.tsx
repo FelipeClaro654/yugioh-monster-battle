@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayout) {
     <html lang="pt-BR">
       <body className={inter.className}>
         <main className="min-h-screen bg-linear-to-b from-blue-900 to-black">
-          {children}
+          <div className="container mx-auto max-h-screen">{children}</div>
         </main>
       </body>
     </html>

@@ -11,9 +11,7 @@ interface GameContainer {
 }
 
 export default function GameContainer({ initialCards }: GameContainer) {
-  const {
-    players: { player1, player2 },
-  } = useBoard({ initialCards });
+  const { player1, player2 } = useBoard({ initialCards });
 
   if (!initialCards.length) {
     return (
@@ -25,10 +23,7 @@ export default function GameContainer({ initialCards }: GameContainer) {
 
   return (
     <section className="game-container flex flex-col h-screen">
-      <Header
-        player1Lifepoints={player1.lifepoints}
-        player2Lifepoints={player2.lifepoints}
-      />
+      <Header player1={player1} player2={player2} />
       <div className="h-full"></div>
       {/* <div className="opponent-area">
         <GameBoard 

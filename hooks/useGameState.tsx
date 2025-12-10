@@ -4,7 +4,7 @@ import { GameActions } from "@/constants";
 import type { Card, GameAction, GameState } from "@/types";
 import { drawInitialCards } from "@/utils/cards";
 
-const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
+export const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
   const player1Cards = [...initialCards];
   const player2Cards = [...initialCards];
 
@@ -71,5 +71,3 @@ const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
 
   return { isInitialized: state.initialized, dispatch, players: state.players };
 };
-
-export default useGameState;

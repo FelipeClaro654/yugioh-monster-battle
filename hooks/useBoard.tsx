@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 
 import { GameActions } from "@/constants";
-import { Card } from "@/types/card";
+import type { Card } from "@/types/card";
 
-import useGameState from "./useGameState";
+import { useGameState } from "./useGameState";
 
 export const useBoard = ({ initialCards }: { initialCards: Card[] }) => {
-  const { players, isInitialized, dispatch } = useGameState({ initialCards });
-  const { player1, player2 } = players;
+  const {
+    players: { player1, player2 },
+    isInitialized,
+    dispatch,
+  } = useGameState({ initialCards });
 
   useEffect(() => {
     if (initialCards.length > 0 && !isInitialized) {
@@ -34,5 +37,5 @@ export const useBoard = ({ initialCards }: { initialCards: Card[] }) => {
     }
   }, [player1.remainingCards, initialCards, isInitialized, dispatch]);
 
-  return { dispatch, players };
+  return { dispatch, player1, player2 };
 };

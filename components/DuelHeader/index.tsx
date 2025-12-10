@@ -1,15 +1,17 @@
+import type { PlayerStatus } from "@/types";
+
 import PlayerScore from "./PlayerScore";
 
 interface DuelHeaderProps {
-  player1Lifepoints: number;
-  player2Lifepoints: number;
+  player1: PlayerStatus;
+  player2: PlayerStatus;
 }
 
-const DuelHeader = (props: DuelHeaderProps) => {
+const DuelHeader = ({ player1, player2 }: DuelHeaderProps) => {
   return (
     <header className="flex flex-col w-full gap-1 mt-2">
-      <PlayerScore player={1} lifepoints={props.player1Lifepoints} />
-      <PlayerScore player={2} lifepoints={props.player2Lifepoints} />
+      <PlayerScore player={1} lifepoints={player1.lifepoints} />
+      <PlayerScore player={2} lifepoints={player2.lifepoints} />
     </header>
   );
 };
