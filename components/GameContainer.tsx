@@ -1,6 +1,6 @@
 "use client";
 
-import { useBoard } from "@/hooks/useBoard";
+import { useGameEffects, useGameState } from "@/hooks";
 import type { Card } from "@/types/card";
 
 import Header from "./DuelHeader";
@@ -11,15 +11,8 @@ interface GameContainer {
 }
 
 export default function GameContainer({ initialCards }: GameContainer) {
-  const { player1, player2 } = useBoard({ initialCards });
-
-  if (!initialCards.length) {
-    return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-        ❌ Não foi possível carregar as cartas. Por favor, recarregue a página.
-      </div>
-    );
-  }
+  const gameData = useGameState({ initialCards });
+  const { player1, player2 } = useGameEffects({ ...gameData });
 
   return (
     <section className="game-container flex flex-col h-screen">

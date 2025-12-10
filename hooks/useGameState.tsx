@@ -4,7 +4,11 @@ import { GameActions } from "@/constants";
 import type { Card, GameAction, GameState } from "@/types";
 import { drawInitialCards } from "@/utils/cards";
 
-export const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
+interface UseGameStateProps {
+  initialCards: Card[];
+}
+
+export const useGameState = ({ initialCards }: UseGameStateProps) => {
   const player1Cards = [...initialCards];
   const player2Cards = [...initialCards];
 

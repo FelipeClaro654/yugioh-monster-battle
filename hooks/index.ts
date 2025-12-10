@@ -1,2 +1,2 @@
-export * from "./useBoard";
+export * from "./useGameEffects";
 export * from "./useGameState";
