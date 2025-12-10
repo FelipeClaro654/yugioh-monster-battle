@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 
+import { GameActions } from "@/constants";
 import type { Card, GameAction, GameState } from "@/types";
 import { drawInitialCards } from "@/utils/cards";
 
@@ -9,7 +10,7 @@ const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
 
   function gameReducer(state: GameState, action: GameAction): GameState {
     switch (action.type) {
-      case "initializeGame": {
+      case GameActions.INITIALIZE_GAME: {
         return {
           ...state,
           initialized: true,
@@ -26,7 +27,7 @@ const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
         };
       }
 
-      case "drawInitialCards": {
+      case GameActions.DRAW_INITIAL_CARDS: {
         return {
           ...state,
           initialized: true,

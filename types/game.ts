@@ -1,3 +1,5 @@
+import { GameActions } from "@/constants/gameActions";
+
 import type { PlayerStatus } from "./player";
 
 export type GameState = {
@@ -9,5 +11,5 @@ export type GameState = {
 };
 
 export type GameAction =
-  | { type: "initializeGame" }
-  | { type: "drawInitialCards" };
+  | { type: GameActions.INITIALIZE_GAME }
+  | { type: GameActions.DRAW_INITIAL_CARDS };

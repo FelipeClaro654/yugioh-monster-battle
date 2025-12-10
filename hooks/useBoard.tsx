@@ -1,37 +1,38 @@
 import { useEffect } from "react";
 
+import { GameActions } from "@/constants";
 import { Card } from "@/types/card";
 
 import useGameState from "./useGameState";
 
 export const useBoard = ({ initialCards }: { initialCards: Card[] }) => {
   const { players, isInitialized, dispatch } = useGameState({ initialCards });
-
-  const Player1Phase = players.player1.phase;
-  const Player2Phase = players.player2.phase;
-  const Player1RemainingCards = players.player1.remainingCards;
+  const { player1, player2 } = players;
 
   useEffect(() => {
     if (initialCards.length > 0 && !isInitialized) {
-      dispatch({ type: "initializeGame" });
+      dispatch({ type: GameActions.INITIALIZE_GAME });
     }
   }, [initialCards, isInitialized, dispatch]);
 
   useEffect(() => {
-    if (Player1Phase === "draw") {
+    if (player1.phase === "draw") {
       return;
     }
 
-    if (Player2Phase === "draw") {
+    if (player2.phase === "draw") {
       return;
     }
-  }, [Player1Phase, Player2Phase]);
+  }, [player1.phase, player2.phase]);
 
   useEffect(() => {
-    if (isInitialized && Player1RemainingCards.length === initialCards.length) {
-      dispatch({ type: "drawInitialCards" });
+    if (
+      isInitialized &&
+      player1.remainingCards.length === initialCards.length
+    ) {
+      dispatch({ type: GameActions.DRAW_INITIAL_CARDS });
     }
-  }, [Player1RemainingCards, initialCards, isInitialized, dispatch]);
+  }, [player1.remainingCards, initialCards, isInitialized, dispatch]);
 
   return { dispatch, players };
 };
