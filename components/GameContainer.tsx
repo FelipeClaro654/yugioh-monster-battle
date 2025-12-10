@@ -35,7 +35,7 @@ export default function GameContainer({ initialCards }: GameContainer) {
         <button onClick={endTurn}>Terminar Turno</button>
       </div> */}
 
-      <PlayerArea cards={player1.hand} />
+      <PlayerArea handCards={player1.hand} deckCards={player1.remainingCards} />
     </section>
   );
 }

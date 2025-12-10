@@ -23,5 +23,5 @@ export type PlayerScoreProps = {
 };
 
 export type PlayerHandProps = {
-  cards: Card[];
+  handCards: Card[];
 };

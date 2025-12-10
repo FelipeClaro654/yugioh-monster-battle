@@ -13,13 +13,13 @@ const PlayerHand = (props: PlayerHandProps) => {
 
   return (
     <div className="flex self-end w-full justify-center">
-      {props?.cards?.map((card, index) => (
+      {props?.handCards?.map((card, index) => (
         <CardTemplate
           key={`${card.id}-${card.name}`}
           showHand={showHand}
           card={card}
           index={index}
-          totalCards={props.cards.length}
+          totalCards={props.handCards.length}
         />
       ))}
     </div>
