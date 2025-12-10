@@ -1,12 +1,8 @@
 import { memo, useState } from "react";
 
-import type { Card } from "@/types/card";
+import type { PlayerHandProps } from "@/types";
 
 import CardTemplate from "./CardTemplate";
-
-type PlayerHandProps = {
-  cards: Card[];
-};
 
 const PlayerHand = (props: PlayerHandProps) => {
   const [showHand, setShowHand] = useState(false);

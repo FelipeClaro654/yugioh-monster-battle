@@ -1,11 +1,11 @@
 import PlayerScore from "./PlayerScore";
 
-type DuelHeaderWrapperProps = {
+interface DuelHeaderProps {
   player1Lifepoints: number;
   player2Lifepoints: number;
-};
+}
 
-const DuelHeaderWrapper = (props: DuelHeaderWrapperProps) => {
+const DuelHeader = (props: DuelHeaderProps) => {
   return (
     <header className="flex flex-col w-full gap-1 mt-2">
       <PlayerScore player={1} lifepoints={props.player1Lifepoints} />
@@ -14,4 +14,4 @@ const DuelHeaderWrapper = (props: DuelHeaderWrapperProps) => {
   );
 };
 
-export default DuelHeaderWrapper;
+export default DuelHeader;

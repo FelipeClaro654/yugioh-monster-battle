@@ -1,36 +1,12 @@
 import { useReducer } from "react";
 
-import { Card } from "@/types/card";
+import type { Card, GameAction, GameState } from "@/types";
 import { drawInitialCards } from "@/utils/cards";
-
-type PlayerStatus = {
-  lifepoints: number;
-  remainingCards: Card[];
-  hand: Card[];
-  boardMonsters: Card[];
-  phase: PlayerPhase;
-};
-type PlayerPhase =
-  | "waiting"
-  | "draw"
-  | "setCard"
-  | "chooseCardPosition"
-  | "useCard"
-  | "end";
-
-type GameState = {
-  initialized: boolean;
-  players: {
-    player1: PlayerStatus;
-    player2: PlayerStatus;
-  };
-};
-
-type GameAction = { type: "initializeGame" } | { type: "drawInitialCards" };
 
 const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
   const player1Cards = [...initialCards];
   const player2Cards = [...initialCards];
+
   function gameReducer(state: GameState, action: GameAction): GameState {
     switch (action.type) {
       case "initializeGame": {
@@ -92,7 +68,7 @@ const useGameState = ({ initialCards }: { initialCards: Card[] }) => {
     },
   });
 
-  return { state, dispatch };
+  return { isInitialized: state.initialized, dispatch, players: state.players };
 };
 
 export default useGameState;

@@ -1,9 +1,6 @@
 import { memo } from "react";
 
-type PlayerScoreProps = {
-  lifepoints: number;
-  player: 1 | 2;
-};
+import type { PlayerScoreProps } from "@/types";
 
 const PlayerScore = (props: PlayerScoreProps) => {
   const background = props.player === 1 ? "bg-purple-500" : "bg-indigo-500";
