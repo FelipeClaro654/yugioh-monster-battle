@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import YuGiOhGame from "@/components/YuGiOhGame";
 import { fetchCards } from "@/lib/yugioh-api";
 

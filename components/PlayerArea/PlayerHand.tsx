@@ -1,6 +1,8 @@
+import { memo, useState } from "react";
+
 import type { Card } from "@/types/card";
+
 import CardTemplate from "./CardTemplate";
-import { useState } from "react";
 
 type PlayerHandProps = {
   cards: Card[];
@@ -14,7 +16,7 @@ const PlayerHand = (props: PlayerHandProps) => {
   }, 1000);
 
   return (
-    <div className="flex  self-end w-full justify-center">
+    <div className="flex self-end w-full justify-center">
       {props?.cards?.map((card, index) => (
         <CardTemplate
           key={`${card.id}-${card.name}`}
@@ -28,4 +30,4 @@ const PlayerHand = (props: PlayerHandProps) => {
   );
 };
 
-export default PlayerHand;
+export default memo(PlayerHand);

@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 
 type PlayerScoreProps = {
   lifepoints: number;
@@ -19,4 +19,4 @@ const PlayerScore = (props: PlayerScoreProps) => {
   );
 };
 
-export default React.memo(PlayerScore);
+export default memo(PlayerScore);

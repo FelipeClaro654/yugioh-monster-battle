@@ -1,5 +1,6 @@
-import { Card } from "@/types/card";
 import { NextResponse } from "next/server";
+
+import { Card } from "@/types/card";
 
 export const dynamic = "force-dynamic";
 

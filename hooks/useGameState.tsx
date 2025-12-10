@@ -1,6 +1,7 @@
+import { useReducer } from "react";
+
 import { Card } from "@/types/card";
 import { drawInitialCards } from "@/utils/cards";
-import { useReducer } from "react";
 
 type PlayerStatus = {
   lifepoints: number;

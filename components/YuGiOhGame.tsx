@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { Card } from "@/types/card";
+
 import useGameState from "@/hooks/useGameState";
-import PlayerScore from "./PlayerScore";
-import PlayerHand from "./PlayerHand";
+import { Card } from "@/types/card";
+
+import HeaderWrapper from "./DuelHeader/DuelHeaderWrapper";
 
 interface YuGiOhGame {
   initialCards: Card[];
@@ -51,10 +52,10 @@ export default function YuGiOhGame({ initialCards }: YuGiOhGame) {
 
   return (
     <section className="game-container flex flex-col h-screen">
-      <header className="flex flex-col w-full gap-1 mt-2">
-        <PlayerScore player={1} lifepoints={state.players.player1.lifepoints} />
-        <PlayerScore player={2} lifepoints={state.players.player2.lifepoints} />
-      </header>
+      <HeaderWrapper
+        player1Lifepoints={state.players.player1.lifepoints}
+        player2Lifepoints={state.players.player2.lifepoints}
+      />
       <div className="h-full"></div>
       {/* <div className="opponent-area">
         <GameBoard 
@@ -72,8 +73,6 @@ export default function YuGiOhGame({ initialCards }: YuGiOhGame) {
         <button onClick={nextPhase}>Próxima Fase</button>
         <button onClick={endTurn}>Terminar Turno</button>
       </div> */}
-
-      <PlayerHand cards={state.players.player1.hand} />
     </section>
   );
 }
